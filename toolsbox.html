@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolsBox Site</title>
+    <style>
+        body {
+            font-family: Monaco;
+            background-color: #f0f4f8;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #3b5998;
+            font-size: 5.0em;
+            margin-top: 8px;
+            font-family: Lucida Handwriting;
+        }
+        p {
+            color: #555;
+            font-size: 1.4em;
+            margin-top: 8px;
+            font-family: Monaco;
+        }
+        .hover-button {
+            padding: 15px;
+            margin: 10px;
+            width: 200px;
+            border-radius: 8px;
+            border: none;
+            background: #98AFC7;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s;
+        }
+        .hover-button:hover {
+            background: #2a4377;
+            transform: scale(1.05);
+        }
+        #modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        #modalContent {
+            background: #2B547E;
+            color: white;
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        #modal span {
+            float: right;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* Back Button Styling */
+        .back-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            background: #3b5998;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .back-button:hover {
+            background: #2a4377;
+            transform: scale(1.05);
+        }
+        .back-main {
+            left: 20px; /* Left side */
+        }
+        .back-info {
+            right: 20px; /* Right side */
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome To My Creation</h1>
+    <p>"Explore a collection of tools designed to make everyday tasks easier and more efficient. From calculations to conversions, everything you need is just a click away!"</p>
+
+    <button onclick="openModal('calculator')" class="hover-button">Calculator</button>
+    <br><br>
+    <button onclick="openModal('bmi')" class="hover-button">BMI Checker</button>
+    <br><br>
+    <button onclick="openModal('zakat')" class="hover-button">Zakat/Tax Calculator</button>
+    <br><br>
+    <button onclick="openModal('converter')" class="hover-button">Unit Converter</button>
+
+    <!-- Back Buttons -->
+    <a href="index.html" class="back-button back-main">&#8592; Main Page</a>
+    <a href="PersonalInfo.html" class="back-button back-info">Personal Info Page &#8594;</a>
+
+    <div id="modal">
+        <div id="modalContent">
+            <span onclick="closeModal()">&times;</span>
+            <div id="toolContent"></div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(tool) {
+            document.getElementById('modal').style.display = 'block';
+            let content = '';
+            if (tool === 'calculator') {
+                content = `<h2>Simple Calculator</h2>
+                    <input id="num1" type="number" placeholder="First number">
+                    <input id="num2" type="number" placeholder="Second number">
+                    <br>
+                    <button onclick="calculate('+')">+</button>
+                    <button onclick="calculate('-')">-</button>
+                    <button onclick="calculate('*')">×</button>
+                    <button onclick="calculate('/')">÷</button>
+                    <h3 id="calcResult"></h3>`;
+            }
+            if (tool === 'bmi') {
+                content = `<h2>BMI Checker</h2>
+                    <input id="weight" type="number" placeholder="Weight (kg)">
+                    <input id="height" type="number" placeholder="Height (cm)">
+                    <br>
+                    <button onclick="calculateBMI()">Check BMI</button>
+                    <h3 id="bmiResult"></h3>`;
+            }
+            if (tool === 'zakat') {
+                content = `<h2>Zakat / Tax Calculator</h2>
+                    <input id="income" type="number" placeholder="Enter income">
+                    <br>
+                    <button onclick="calculateZakat()">Zakat (2.5%)</button>
+                    <button onclick="calculateTax()">Tax (5%)</button>
+                    <h3 id="zakatResult"></h3>`;
+            }
+            if (tool === 'converter') {
+                content = `<h2>Unit Converter</h2>
+                    <input id="unitInput" type="number" placeholder="Enter value">
+                    <br>
+                    <button onclick="convert('cm-m')">cm → m</button>
+                    <button onclick="convert('m-cm')">m → cm</button>
+                    <button onclick="convert('m-km')">m → km</button>
+                    <button onclick="convert('km-m')">km → m</button>
+                    <h3 id="convertResult"></h3>`;
+            }
+            document.getElementById('toolContent').innerHTML = content;
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        function calculate(op) {
+            let num1 = parseFloat(document.getElementById('num1').value) || 0;
+            let num2 = parseFloat(document.getElementById('num2').value) || 0;
+            let result = op === '/' && num2 === 0 ? "Cannot divide by zero!" :
+                         op === '+' ? num1 + num2 :
+                         op === '-' ? num1 - num2 :
+                         op === '*' ? num1 * num2 :
+                         num1 / num2;
+            document.getElementById('calcResult').innerHTML = "Result: " + result;
+        }
+
+        function calculateBMI() {
+            let weight = parseFloat(document.getElementById('weight').value);
+            let height = parseFloat(document.getElementById('height').value) / 100;
+            if (height > 0) {
+                let bmi = (weight / (height * height)).toFixed(2);
+                let category = bmi < 18.5 ? "Underweight" : bmi < 25 ? "Normal" : bmi < 30 ? "Overweight" : "Obese";
+                document.getElementById('bmiResult').innerHTML = `BMI: ${bmi} (${category})`;
+            } else {
+                document.getElementById('bmiResult').innerHTML = "Invalid height!";
+            }
+        }
+
+        function calculateZakat() {
+            let income = parseFloat(document.getElementById('income').value) || 0;
+            document.getElementById('zakatResult').innerHTML = "Zakat: RM " + (income * 0.025).toFixed(2);
+        }
+
+        function calculateTax() {
+            let income = parseFloat(document.getElementById('income').value) || 0;
+            document.getElementById('zakatResult').innerHTML = "Tax: RM " + (income * 0.05).toFixed(2);
+        }
+
+        function convert(type) {
+            let value = parseFloat(document.getElementById('unitInput').value) || 0;
+            let result = type === 'cm-m' ? value / 100 :
+                         type === 'm-cm' ? value * 100 :
+                         type === 'm-km' ? value / 1000 :
+                         value * 1000;
+            document.getElementById('convertResult').innerHTML = "Converted: " + result.toFixed(2);
+        }
+    </script>
+</body>
+</html>

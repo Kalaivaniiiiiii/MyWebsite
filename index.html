@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Site</title>
+</head>
+<body style="background: #f0f4f8; text-align: center; padding: 50px; overflow: hidden;">
+
+    <h1 style="color: #3b5998; font-size:5.0em;font-family:Lucida Handwriting; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px;">
+        Welcome to My Website
+    </h1>
+
+    <p style="color: #3b5998; font-size: 1.4em;font-family:Monoco; margin-bottom: 40px;">Explore my world with just one click!</p>
+
+    <div style="margin-top: 50px;">
+        <button onclick="goToPage('PersonalInfo.html')" 
+            style="background: #3b5998; color: white; font-size: 22px;font-family:Monoco; padding: 15px 40px; border: none; cursor: pointer; border-radius: 15px; transition: 0.3s; margin: 15px; box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); position: relative;">
+            Personal Info
+			
+        </button>
+
+        <button onclick="goToPage('toolsbox.html')" 
+            style="background: #add8e6; color: #3b5998; font-size: 22px;font-family:Monoco; padding: 15px 40px; border: none; cursor: pointer; border-radius: 15px; transition: 0.3s; margin: 15px; box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); position: relative;">
+            Tools Box
+        </button>
+    </div>
+
+    <script>
+        function goToPage(page) {
+            window.location.href = page;
+        }
+
+        // Smooth fade-in effect for the page
+        document.body.style.opacity = "0";
+        document.addEventListener("DOMContentLoaded", function() {
+            document.body.style.transition = "opacity 1s ease-in-out";
+            document.body.style.opacity = "1";
+        });
+
+        // Floating animation effect for buttons
+        let buttons = document.querySelectorAll("button");
+        buttons.forEach(button => {
+            button.addEventListener("mouseover", function() {
+                this.style.transform = "translateY(-5px) scale(1.05)";
+                this.style.boxShadow = "0px 15px 25px rgba(0, 0, 0, 0.3)";
+            });
+            button.addEventListener("mouseout", function() {
+                this.style.transform = "translateY(0) scale(1)";
+                this.style.boxShadow = "0px 10px 20px rgba(0, 0, 0, 0.2)";
+            });
+            button.addEventListener("mousedown", function() {
+                this.style.transform = "translateY(2px) scale(0.98)";
+            });
+            button.addEventListener("mouseup", function() {
+                this.style.transform = "translateY(-5px) scale(1.05)";
+            });
+        });
+    </script>
+
+</body>
+</html>

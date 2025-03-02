@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PersonalInfo Site</title>
+    
+    <style>
+	
+	html, body {
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+	
+        /* ========== GENERAL STYLING ========== */
+        body {
+            font-family: Monoco;
+            background-color: #f0f4f8; /* Light blue-grey background */
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ========== NAVIGATION BAR ========== */
+        .navbar {
+            width: 100%;
+            background: #add8e6; /* Light blue */
+            padding: 15px 0;
+            display: flex;
+			font-size:20px;
+            justify-content: center;
+            position: fixed; /* Fix at the top */
+            top: 0;
+            z-index: 1000; /* Keep it above everything */
+        }
+
+        .navbar a {
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            transition: background 0.3s;
+            margin: 0 10px; 
+        }
+
+        .navbar a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        /* ========== HOME SECTION ========== */
+        .home {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 50px;
+            text-align: center;
+        }
+
+        .home-content {
+            flex: 1;
+            text-align: right;
+            padding-right: 10px;
+        }
+
+        .home-content h1 {
+            font-size: 4.5em;
+            font-family: Lucida Handwriting;
+            color: #3b5998;
+            padding: 10px;
+            margin-top: 0px;
+        }
+
+        .home-content p {
+            font-size: 1.4em;
+            font-family: Monaco;
+            color: #555;
+        }
+
+        .home-image {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .home-image img {
+            width: 400px;
+            height: 480px;
+            border-radius: 40%;
+            transition: transform 1s ease, opacity 0.5s ease-in-out;
+            opacity: 0;
+			margin-top:70px;
+			
+        }
+
+        .home-image img:hover {
+            transform: scale(1.1) ;
+        }
+
+        .home-image img.fade-in {
+            opacity: 1;
+        }
+
+        /* ========== ABOUT SECTION ========== */
+        .about {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 50px 10%;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            text-align: left;
+        }
+
+        /* About Image - ROUND shape & fade-in effect */
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .about-image img {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%; /* ROUND Shape */
+            object-fit: cover;
+            border: 6px solid #FFFFFF;
+            opacity: 0;
+            transition: transform 1s ease, opacity 0.5s ease-in-out;
+        }
+
+        .about-image img:hover {
+            transform: scale(1.1);
+        }
+
+        .about-image img.fade-in {
+            opacity: 1;
+        }
+
+        /* About Text */
+        .about-text {
+            flex: 2;
+            padding-left: 40px;
+        }
+
+        .about-text h1 {
+            font-size: 2.8em;
+            color: #3b5998;
+            font-family: Monaco;
+        }
+
+        .about-text p {
+            font-size: 1.2em;
+            color: #555;
+            font-family: Monaco;
+            margin: 10px 0;
+        }
+
+        /* Links inside the About Section */
+        .links a {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: white;
+            background: #add8e6;
+            border-radius: 5px;
+        }
+
+        .links a:hover {
+            background: #2a4377;
+        }
+		
+		
+		/*Skills Section*/
+		
+	.skill {
+    width:auto;
+    text-align: center;
+    padding: 10px; /* Space inside */
+    margin: 10px; /* Space outside */
+    display: flex;
+    justify-content:center; /* Adjust alignment */
+    flex-wrap: wrap;
+    gap: 5px; /* Adjust the gap between circles */
+	margin:10px;
+}	
+	
+	.progress-circle {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: conic-gradient(#3b5998 0deg, #ddd 0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+	margin:2px;
+	
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+    .progress-circle::before {
+        content: "";
+        width: 80px;
+        height: 80px;
+        background: white;
+        border-radius: 50%;
+        position: absolute;
+    }
+
+    .progress-text {
+        position: absolute;
+        font-size: 1em;
+        font-weight: bold;
+		font-family:Monaco;
+        color: #333;
+        z-index: 10;
+    }
+	
+	
+	.parent-container {
+    padding: 0px;
+    margin: 0px;
+    width:auto;
+}
+
+       /* ========== TOOLSBOX SECTION ========== */
+	   
+     /* ========== FLEX CONTAINER TO ALIGN SECTIONS ========== */
+        .container {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            max-width: 1200px;
+			gap:400px;
+			flex-wrap:nowrap;
+		
+			
+        }
+
+        /* ========== COMMON BOX STYLE ========== */
+        .box {
+            width: 500px;
+			min-width:300px;
+			max-width:350px;
+			height:300px;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* ========== TOOLS BOX ========== */
+        .toolsbox {
+            margin-left: 0;
+			margin-top:5%
+			
+		
+        }
+
+        .toolsbox h1 {
+            font-size: 2.5em;
+            color: #3b5998;
+        }
+
+        .toolsbox p {
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        .toolsbox a {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            font-family: Monaco;
+            color: white;
+            background: #add8e6;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background 0.3s ease, transform 0.2s ease-in-out;
+        }
+
+        /* ========== MAIN PAGE BOX ========== */
+        .mainbox {
+            margin-right: 0;
+			margin-top:5%;
+			
+			
+	
+        }
+
+        .mainbox h1 {
+            font-size: 2.5em;
+            color: #3b5998;
+        }
+
+        .mainbox p {
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        .mainbox a {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            font-family: Monaco;
+            color: white;
+            background: #3b5998;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background 0.3s ease, transform 0.2s ease-in-out;
+        }
+
+        /* ========== HOVER EFFECT ========== */
+        .box:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.3);
+        }
+	
+/* ========== CONTACT SECTION ========== */
+        
+		.contact {
+            display: flex;
+            flex-direction: column;
+			margin-top:5%;
+            align-items: center;
+            width: 100%;
+            padding: 40px 10%;
+            background: #f0f4f8;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            border-radius: 10px;
+            text-align: center;
+        }
+        /* Contact Text - Centered */
+        .contact-text {
+            margin-bottom: 20px;
+        }
+        .contact-text h1 {
+            font-size: 2.8em;
+            color: #3b5998;
+            font-family: Monaco;
+            margin-bottom: 10px;
+        }
+        .contact-text p {
+            font-size: 1.2em;
+            color: #555;
+            font-family: Monaco;
+            margin: 5px 0;
+        }
+        /* Contact Container - Two Columns */
+        .contact-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+            max-width: 900px;
+            margin-top: 20px;
+        }
+        /* Left Side - Contact Info */
+        .contact-info {
+            width: 45%;
+            text-align: left;
+            font-size: 1.2em;
+			font-family:Monoco;
+            color: #555;
+        }
+        .contact-info p {
+            margin: 10px 0;
+        }
+        .contact-info a {
+            color: #3b5998;
+            text-decoration: none;
+            font-weight: bold;
+			font-family:Monoco;
+        }
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        /* WhatsApp Button */
+        .social-links {
+            margin-top: 15px;
+        }
+        .social-links a {
+            display: inline-block;
+            padding: 10px 15px;
+            background: #007bff;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .social-links a:hover {
+            background: #2a4377;
+        }
+        .whatsapp-link {
+            background: #6fc276 !important;
+        }
+		
+		
+		
+        /* Right Side - Contact Form */
+        .contact-form {
+            width: 50%;
+            text-align: left;
+        }
+        .contact-form input, 
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #3b5998;
+            border-radius: 5px;
+            font-size: 1.1em;
+			font-family:Monoco;
+        }
+        .contact-form textarea {
+            height: 120px;
+            resize: none;
+        }
+        .contact-form button {
+            width: 100%;
+            padding: 10px;
+            background: #add8e6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+			font-family:Monoco;
+            cursor: pointer;
+        }
+        .contact-form button:hover {
+            background: #2a4377;
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .contact-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .contact-info, .contact-form {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+
+ 
+
+    </style>
+</head>
+<body>
+
+    <!-- ========== NAVIGATION BAR ========== -->
+    <div class="navbar">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#background">Background</a>
+		<a href="#toolsbox">Tools Box</a>
+		<a href="#mainbox">Main</a>
+        <a href="#contact">Contact</a>
+		
+		
+		</div> 
+
+    <!-- ========== HOME SECTION ========== -->
+    <div id="home" class="home">
+        <div class="home-content">
+            <h1>Welcome To My Personal Info WebSite</h1>
+			<br>
+            <p>Learn about my background, interests, and experiences.</p>
+			<br>
+            <p>Explore my journey!</p>
+        </div>
+        <div class="home-image">
+            <img src="homepic.jpg" alt="Profile Picture" id="profilePic">
+        </div>
+    </div>
+
+    <!-- ========== ABOUT SECTION ========== -->
+    <div id="about" class="about">
+        <div class="about-image">
+            <img src="aboutpic.jpg" alt="Profile Photo" id="aboutPic">
+        </div>
+
+        <div class="about-text">
+            <h1>Who Am I?</h1>
+            <p><strong>Name:</strong> Kalaivani A/P Kumar</p>
+            <p><strong>Matric:</strong> A23DW0177</p>
+            <p><strong>Program & Section:</strong> Diploma in Computer Science - 42</p>
+            <p>
+                &nbsp;&nbsp;&nbsp;Hi! My name is Kalaivani, and I am currently pursuing a Diploma in Computer Science. 
+                I have a deep passion for technology, programming, and creating innovative solutions that make life easier.
+                My journey in computer science has allowed me to develop problem-solving skills and explore different areas, 
+                from software development to web design.
+            </p>
+            
+            <div class="links">
+                <a href="CVRESUME.jpg" target="_blank">View My CV</a>
+                <a href="CVRESUME.pdf" download>Download CV (PDF)</a>
+            </div>
+        </div>
+    </div>
+
+<!-- ========== BACKGROUND SECTION ========== -->
+<div id="background" style="width: 100%; padding: 50px 10%; background:  #f0f4f8; text-align: left; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    <div class="background-content">
+        <h1 style="font-size: 2.8em; color: #3b5998; font-family: Monaco; margin-bottom: 10px;">My Background</h1>
+
+        <button onclick="toggleSection('education')" style="display: block; width: 60%; padding: 15px; margin-top: 10px; font-size: 1.2em; font-weight: bold; color: white;font-family:Monoco; background: #add8e6; border: none; border-radius: 10px; cursor: pointer; transition: background 0.3s ease, transform 0.2s ease-in-out;">
+            🎓 Education
+        </button>
+        <div id="education" style="display: none; background: #f0f4f8; padding: 15px; border-left: 5px solid #3b5998; margin-top: 5px;">
+            
+			<p><strong>SEKOLAH KEBANGSAAN KOTA MASAI</strong> (2012 - 2017)</p>
+            <br>
+            <p><strong>SEKOLAH MENENGAH KOTA MASAI</strong> (2018 - 2023)</p>
+			<br>
+			<p><strong>UNIVERSITY TECHNOLOGY MALAYSIA (SPACE) </strong> (2023 - 2025)</p>
+           
+        </div>
+
+        <button onclick="toggleSection('passions')" style="display: block; width: 70%; padding: 15px; margin-top: 10px; font-size: 1.2em; font-weight: bold; color: white;font-family:Monoco; background: #add8e6; border: none; border-radius: 10px; cursor: pointer; transition: background 0.3s ease, transform 0.2s ease-in-out;">
+            ❤️ Passions
+        </button>
+        <div id="passions" style="display: none; background: #f0f4f8; padding: 15px; border-left: 5px solid #3b5998; margin-top: 5px;">
+            <ul style="font-size: 1.2em; color: #555; font-family: Monaco;">
+                <li>Programming: Java, Python, C++</li>
+                <li>Web Development: HTML, CSS, JavaScript</li>
+                <li>Database Management: MySQL, SQLite</li>
+            </ul>
+        </div>
+
+        <button onclick="toggleSection('projects')" style="display: block; width: 80%; padding: 15px; margin-top: 10px; font-size: 1.2em; font-weight: bold; color: white;font-family:Monoco; background: #add8e6; border: none; border-radius: 10px; cursor: pointer; transition: background 0.3s ease, transform 0.2s ease-in-out;">
+            🚀 Projects
+        </button>
+        <div id="projects" style="display: none; background: #f0f4f8; padding: 15px; border-left: 5px solid #3b5998; margin-top: 5px;">
+            <p><strong>Personal Website</strong> - A portfolio website to showcase my skills and background.</p>
+            <p><strong>Android Login App</strong> - A mobile app for user registration and login using SQLite.</p>
+        </div>
+
+        <button onclick="toggleSection('certifications')" style="display: block; width: 90%; padding: 15px; margin-top: 10px; font-size: 1.2em; font-weight: bold; color: white;font-family:Monoco; background: #add8e6; border: none; border-radius: 10px; cursor: pointer; transition: background 0.3s ease, transform 0.2s ease-in-out;">
+            🏅 Certifications
+        </button>
+        <div id="certifications" style="display: none; background: #f0f4f8; padding: 15px; border-left: 5px solid #3b5998; margin-top: 5px;font-size: 1.2em; color: #555; font-family: Monaco;">
+            
+            <p>Google IT Support Certificate</p>
+            <p>Udemy Web Development Bootcamp</p>
+            
+        </div>
+		
+		<!-- ========== SKILLS SECTION ========== -->
+<button onclick="toggleSection('skills')" style="display: block; width: 100%; padding: 15px; margin-top: 10px; font-size: 1.2em; font-weight: bold; color: white;font-family:Monoco; background: #add8e6; border: none; border-radius: 10px; cursor: pointer; transition: background 0.3s ease, transform 0.2s ease-in-out;">
+    🛠️ Skills
+</button>
+<div id="skills" style="display: none; background: #f0f4f8; padding: 15px; border-left: 5px solid #3b5998; margin-top: 5px; text-align: center;">
+    <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+
+        <!-- Skill 1: HTML -->
+        <div class="skill">
+            <div class="progress-circle" data-percent="90">
+                <div class="progress-text">HTML</div>
+            </div>
+        </div>
+
+        <!-- Skill 2: CSS -->
+        <div class="skill">
+            <div class="progress-circle" data-percent="85">
+                <div class="progress-text">CSS</div>
+            </div>
+        </div>
+
+        <!-- Skill 3: JavaScript -->
+        <div class="skill">
+            <div class="progress-circle" data-percent="75">
+                <div class="progress-text">JavaScript</div>
+            </div>
+        </div>
+
+        <!-- Skill 4: Java -->
+        <div class="skill">
+            <div class="progress-circle" data-percent="80">
+                <div class="progress-text">Java</div>
+            </div>
+        </div>
+
+        <!-- Skill 5: Python -->
+        <div class="skill">
+            <div class="progress-circle" data-percent="70">
+                <div class="progress-text">Python</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+		
+		
+		<!-- ========== TOOLS BOX SECTION ========== -->
+
+<!-- ========== CONTAINER TO HOLD TOOLS BOX & MAIN PAGE ========== -->
+    <div class="container">
+        
+        <!-- Left Side - Tools Box -->
+        <div id="toolsbox" class="box toolsbox">
+            <h1>Tools Box</h1>
+            <p>Access useful tools like Calculator, BMI Checker, Zakat Calculator, and more.</p>
+            <a href="toolsbox.html">Open Tools Box</a>
+        </div>
+
+        <!-- Right Side - Main Page Box -->
+        <div id="mainbox" class="box mainbox">
+            <h1>Main Page</h1>
+            <p>Find everything you need—personal details and powerful tools, all in one click!</p>
+            <a href="index.html">Go to Main Page</a>
+        </div>
+
+    </div>
+	
+	<!-- ========== CONTACT SECTION ========== -->
+
+<div id="contact" class="contact">
+        <!-- Contact Header -->
+        <div class="contact-text">
+            <h1>Get In Touch</h1>
+            <p>Have a question or want to collaborate?</p>
+            <p>Feel free to reach out!</p>
+        </div>
+        <div class="contact-container">
+            <!-- Left Side - Contact Info -->
+            <div class="contact-info">
+                <p><strong>Email:</strong> <a href="mailto:iamkalaivani18@gmail.com">iamkalaivani18@gmail.com</a></p>
+                <p><strong>Phone:</strong> <a href="tel:+6011-24011835">+60 11-24011835</a></p>
+                <!-- WhatsApp Link -->
+                <div class="social-links">
+                    <a href="https://wa.me/601124011835" target="_blank" class="whatsapp-link">WhatsApp</a>
+                </div>
+            </div>
+            <!-- Right Side - Contact Form -->
+            <div class="contact-form">
+                <form id="contactForm">
+                    <input type="text" id="name" placeholder="Your Name" required>
+                    <input type="email" id="email" placeholder="Your Email" required>
+                    <textarea id="message" placeholder="Your Message" required></textarea>
+                    <button type="submit"><b>Send Message</b></button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    
+	
+</div>
+	
+	
+</div>
+
+
+
+    <script>
+        // Fade-in Effect on Page Load
+        window.onload = function() {
+            document.getElementById("profilePic").classList.add("fade-in");
+            document.getElementById("aboutPic").classList.add("fade-in");
+        };
+
+        // Tap to Trigger Fade-in Again for Home Image
+        document.getElementById("profilePic").addEventListener("click", function() {
+            this.classList.remove("fade-in");
+            setTimeout(() => {
+                this.classList.add("fade-in");
+            }, 10);
+        });
+
+
+    function toggleSection(sectionId) {
+        var section = document.getElementById(sectionId);
+        section.style.display = (section.style.display === "none" || section.style.display === "") ? "block" : "none";
+    }
+
+
+      // Function to animate circular progress indicators
+    document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".progress-circle").forEach(circle => {
+        let percent = circle.getAttribute("data-percent");
+        let degree = percent * 3.6 + "deg";
+        circle.style.background = `conic-gradient(#3b5998 ${degree}, #ddd ${degree})`;
+    });
+});
+	
+	
+	 // Floating hover effect for the Tools Box
+    let toolsBox = document.getElementById("toolsbox");
+
+    toolsBox.addEventListener("mouseover", function() {
+        this.style.transform = "translateY(-5px) scale(1.05)";
+        this.style.boxShadow = "0px 15px 25px rgba(0, 0, 0, 0.3)";
+    });
+
+    toolsBox.addEventListener("mouseout", function() {
+        this.style.transform = "translateY(0) scale(1)";
+        this.style.boxShadow = "0px 10px 20px rgba(0, 0, 0, 0.1)";
+    });
+	
+	 // Contact Form Submission (No Backend, Just Simulated)
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevents actual form submission
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let message = document.getElementById("message").value;
+            if (name && email && message) {
+                alert("Thank you, " + name + "! Your message has been sent.");
+                document.getElementById("contactForm").reset();
+            } else {
+                alert("Please fill in all fields.");
+            }
+        });
+
+
+    </script>
+	
+
+</body>
+</html>
+  
